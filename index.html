@@ -120,23 +120,40 @@
 
     <script>
         function calcularInvestimento() {
-            const consumo = document.getElementById("consumo").value;
+            const consumo = parseFloat(document.getElementById("consumo").value);
             const tipoSistema = document.getElementById("tipoSistema").value;
             const valorKwh = 1;
 
-            if (consumo <= 0) {
+            // Taxas mínimas
+            const taxaMinimaMonofasico = 30; // kWh
+            const taxaMinimaTrifasico = 100; // kWh
+
+            // Determine o consumo a considerar
+            let consumoFinal;
+            let taxaMinimaMensal;
+            if (tipoSistema === "monofasico") {
+                consumoFinal = Math.max(consumo, taxaMinimaMonofasico);
+                taxaMinimaMensal = taxaMinimaMonofasico * valorKwh;
+            } else {
+                consumoFinal = Math.max(consumo, taxaMinimaTrifasico);
+                taxaMinimaMensal = taxaMinimaTrifasico * valorKwh;
+            }
+
+            if (consumoFinal <= 0) {
                 document.getElementById("resultado").style.display = "block";
                 document.getElementById("resultado").innerHTML = "Por favor, insira um valor de consumo válido!";
                 return;
             }
 
-            const custoMensal = consumo * valorKwh;
+            const custoMensal = consumoFinal * valorKwh; // Custo real da energia
+            const custoTotalMensal = custoMensal + taxaMinimaMensal; // Custo total inclui custo de consumo + taxa mínima
+
             const custoPorPlaca = 650;
             const potenciaPorPlaca = 500;
-            const eficiencia = 0.85;
-            const geracaoDiariaPorPlaca = potenciaPorPlaca * eficiencia / 1000 * 5;
-            const geracaoMensalPorPlaca = geracaoDiariaPorPlaca * 30;
-            const numPlacas = Math.ceil(consumo / geracaoMensalPorPlaca);
+            const eficiencia = 0.85; // Eficiência dos painéis
+            const geracaoDiariaPorPlaca = (potenciaPorPlaca * eficiencia / 1000) * 5; // kWh gerados por dia
+            const geracaoMensalPorPlaca = geracaoDiariaPorPlaca * 30; // kWh gerados em um mês
+            const numPlacas = Math.ceil(consumoFinal / geracaoMensalPorPlaca); // Placas necessárias
 
             let custoInversor, numInversores;
             if (tipoSistema === "trifasico") {
@@ -147,19 +164,30 @@
                 numInversores = Math.ceil(numPlacas / 4);
             }
 
-            const investimentoPlacas = numPlacas * custoPorPlaca;
-            const custoMaterialMaoDeObra = investimentoPlacas * 0.712;
-            const investimentoTotal = investimentoPlacas + (numInversores * custoInversor) + custoMaterialMaoDeObra;
-            const retornoAno = custoMensal * 12;
+            const investimentoPlacas = numPlacas * custoPorPlaca; // Custo das placas
+            const custoMaterialMaoDeObra = investimentoPlacas * 0.712; // Custo com mão de obra
+            const investimentoTotal = investimentoPlacas + (numInversores * custoInversor) + custoMaterialMaoDeObra; // Investimento total
+
+            // O retorno total mensal é a economia com energia gerada menos a taxa mínima
+            const economiaMensal = custoMensal - taxaMinimaMensal; // Economiza o que pagava pela energia
+            const retornoMensal = Math.max(0, economiaMensal); // Garantir que não fique negativo
+            const retornoAno = retornoMensal * 12; // O retorno anual
+
+            // Tempo de retorno em anos
             const tempoRetorno = investimentoTotal / retornoAno;
+
+            // Converte tempoRetorno em anos e meses
+            const anos = Math.floor(tempoRetorno);
+            const meses = Math.round((tempoRetorno - anos) * 12); // Calcula o resto em meses
 
             document.getElementById("resultado").style.display = "block";
             document.getElementById("resultado").innerHTML = `
                 <p><strong>Valor do consumo mensal:</strong> R$ ${custoMensal.toFixed(2)}</p>
+                <p><strong>Taxa mínima a ser paga mensalmente:</strong> R$ ${taxaMinimaMensal.toFixed(2)} (${tipoSistema === "monofasico" ? taxaMinimaMonofasico : taxaMinimaTrifasico} kWh)</p>
                 <p><strong>Número de placas solares necessárias:</strong> ${numPlacas} placas</p>
                 <p><strong>Custo de inversores:</strong> R$ ${(numInversores * custoInversor).toFixed(2)} (${numInversores} inversores)</p>
                 <p><strong>Investimento total estimado:</strong> R$ ${investimentoTotal.toFixed(2)}</p>
-                <p><strong>Retorno do investimento:</strong> Aproximadamente ${tempoRetorno.toFixed(1)} anos</p>
+                <p><strong>Retorno do investimento:</strong> Aproximadamente ${anos} anos e ${meses} meses</p>
             `;
         }
     </script>
