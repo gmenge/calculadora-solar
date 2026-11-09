@@ -1,0 +1,67 @@
+name: Atualizar dados
+
+on:
+  schedule:
+    - cron: "17 9 * * *"    # todo dia, 06:17 em Brasília: preços e tarifas
+    - cron: "41 9 3 * *"    # dia 3 de cada mês: também o mapa município -> distribuidora
+  workflow_dispatch:
+    inputs:
+      municipios:
+        description: "Atualizar também o mapa de municípios (baixa ~110 MB da ANEEL)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atualizar-dados
+  cancel-in-progress: false
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Preços de mercado
+        env:
+          ML_CLIENT_ID: ${{ secrets.ML_CLIENT_ID }}
+          ML_CLIENT_SECRET: ${{ secrets.ML_CLIENT_SECRET }}
+        run: python scripts/coletar_precos.py
+        continue-on-error: true
+
+      - name: Mapa de municípios (mensal)
+        if: github.event.schedule == '41 9 3 * *' || inputs.municipios
+        run: |
+          pip install --quiet pyarrow
+          curl -sSfL -o "$RUNNER_TEMP/gd.parquet" \
+            "https://dadosabertos.aneel.gov.br/dataset/5e0fafd2-21b9-4d5b-b622-40438d40aba2/resource/cd29f6eb-e08d-4db7-b6fb-ed6e3b682d27/download/empreendimento-geracao-distribuida.parquet"
+          echo "GD_ARG=--gd $RUNNER_TEMP/gd.parquet" >> "$GITHUB_ENV"
+
+      - name: Tarifas ANEEL
+        run: python scripts/atualizar_dados.py $GD_ARG
+        continue-on-error: true
+
+      - name: Testes do cálculo
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm test
+
+      - name: Salvar alterações
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          if git diff --cached --quiet; then
+            echo "Sem mudanças."
+          else
+            git commit -m "Dados atualizados em $(date -u +%d/%m/%Y)"
+            git push
+          fi

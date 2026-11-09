@@ -1,0 +1,8 @@
+{
+  "name": "calculadora-solar",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test \"testes/*.test.mjs\""
+  }
+}

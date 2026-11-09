@@ -1,195 +1,150 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Investimento Solar</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background: linear-gradient(to right, #ffdd00, #ffb347);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-            max-width: 1000px;
-            width: 90%;
-            text-align: center;
-        }
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-        .info {
-            background: #e3f2fd;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        label {
-            font-size: 18px;
-            margin: 10px 0 5px;
-            display: block;
-        }
-        input[type="number"],
-        select {
-            width: 100%;
-            max-width: 600px;
-            padding: 12px;
-            font-size: 16px;
-            margin: 10px auto;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-            display: block;
-        }
-        button {
-            width: fit-content;
-            padding: 12px 30px;
-            font-size: 16px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background 0.3s;
-            margin: 20px auto 0;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        .result {
-            font-size: 18px;
-            margin-top: 20px;
-            background: #f1f8e9;
-            padding: 15px;
-            border-radius: 8px;
-            display: none;
-        }
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 14px;
-            color: #fff;
-            width: 100%;
-        }
-        @media (max-width: 768px) {
-            .container {
-                width: 95%;
-                padding: 15px;
-            }
-            input[type="number"], select {
-                max-width: 100%;
-            }
-        }
-    </style>
+    <title data-i18n>Calculadora Solar</title>
+    <meta name="description" data-i18n-attr="content" content="Estime o sistema fotovoltaico, o investimento e o retorno com irradiação do seu local, tarifa da sua distribuidora e as regras da Lei 14.300.">
+    <meta name="theme-color" content="#f59e0b">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='7' fill='%23f59e0b'/><g stroke='%23f59e0b' stroke-width='2.5' stroke-linecap='round'><path d='M16 2v4M16 26v4M2 16h4M26 16h4M6 6l3 3M23 23l3 3M6 26l3-3M23 9l3-3'/></g></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/estilo.css">
+    <script>try { const t = localStorage.getItem("calculadora-solar:tema"); if (t) document.documentElement.dataset.theme = t; } catch {}</script>
+    <script type="module" src="js/app.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Calculadora de Investimento Solar</h1>
-        <div class="info">
-            <p>Insira seu consumo mensal de energia e selecione o tipo de sistema solar para calcular o investimento necessário e o tempo estimado de retorno financeiro.</p>
+    <header class="topo">
+        <div class="topo-interno">
+            <div class="marca">
+                <svg class="sol" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="7"/><path d="M16 2v4M16 26v4M2 16h4M26 16h4M6 6l3 3M23 23l3 3M6 26l3-3M23 9l3-3"/></svg>
+                <span data-i18n>Calculadora Solar</span>
+            </div>
+            <div class="topo-acoes">
+                <div class="idiomas" role="group" aria-label="Idioma" data-i18n-attr="aria-label">
+                    <button type="button" data-lang="pt" aria-pressed="true">PT</button>
+                    <button type="button" data-lang="en" aria-pressed="false">EN</button>
+                    <button type="button" data-lang="es" aria-pressed="false">ES</button>
+                </div>
+                <button type="button" id="tema" class="botao-icone" aria-label="Alternar tema" data-i18n-attr="aria-label">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/></svg>
+                </button>
+            </div>
         </div>
+        <div class="hero">
+            <h1 data-i18n>Quanto você economiza com energia solar?</h1>
+            <p data-i18n>Dimensionamento, investimento e retorno com a irradiação do seu endereço, a tarifa da sua distribuidora e as regras atuais de geração distribuída.</p>
+            <ul class="selos">
+                <li><span class="ponto"></span><span data-i18n>Irradiação NASA POWER</span></li>
+                <li><span class="ponto"></span><span data-i18n>Tarifas ANEEL</span></li>
+                <li><span class="ponto"></span><span data-i18n>Lei 14.300</span></li>
+            </ul>
+        </div>
+    </header>
 
-        <label for="tipoSistema">Selecione o tipo de sistema:</label>
-        <select id="tipoSistema">
-            <option value="trifasico">Sistema Trifásico</option>
-            <option value="monofasico">Sistema Monofásico</option>
-        </select>
+    <main class="layout">
+        <form id="form" class="painel entradas" autocomplete="off" novalidate>
+            <fieldset>
+                <legend><span class="passo">1</span> <span data-i18n>Local</span></legend>
+                <label for="cep" data-i18n>CEP do imóvel</label>
+                <div class="linha-campo">
+                    <input id="cep" name="cep" inputmode="numeric" placeholder="00000-000" maxlength="9">
+                    <button type="button" id="buscar-cep" class="botao" data-i18n>Buscar</button>
+                </div>
+                <p id="status-local" class="ajuda" aria-live="polite"></p>
 
-        <label for="consumo">Consumo mensal em kWh:</label>
-        <input type="number" id="consumo" placeholder="Digite o consumo em kWh" required>
+                <label for="distribuidora" data-i18n>Distribuidora de energia</label>
+                <select id="distribuidora" name="distribuidora" disabled>
+                    <option value="" data-i18n>Informe o CEP primeiro</option>
+                </select>
+            </fieldset>
 
-        <button onclick="calcularInvestimento()">Calcular</button>
+            <fieldset>
+                <legend><span class="passo">2</span> <span data-i18n>Consumo</span></legend>
+                <span class="rotulo" data-i18n>Tipo de ligação</span>
+                <div class="segmentado" role="radiogroup" aria-label="Tipo de ligação" data-i18n-attr="aria-label">
+                    <label><input type="radio" name="ligacao" value="monofasico" checked><span data-i18n>Monofásica</span></label>
+                    <label><input type="radio" name="ligacao" value="bifasico"><span data-i18n>Bifásica</span></label>
+                    <label><input type="radio" name="ligacao" value="trifasico"><span data-i18n>Trifásica</span></label>
+                </div>
 
-        <div class="result" id="resultado"></div>
+                <div class="rotulo-linha">
+                    <label for="consumo" data-i18n>Consumo médio mensal</label>
+                    <button type="button" id="alternar-meses" class="link">Informar mês a mês</button>
+                </div>
+                <div class="campo-unidade">
+                    <input id="consumo" name="consumo" type="number" min="0" step="1" inputmode="numeric" placeholder="350">
+                    <span>kWh</span>
+                </div>
+                <div id="meses" class="grade-meses" hidden></div>
+                <p class="ajuda" data-i18n>Está na conta de luz, no histórico dos últimos 12 meses.</p>
+            </fieldset>
+
+            <fieldset>
+                <legend><span class="passo">3</span> <span data-i18n>Tarifa</span></legend>
+                <div class="rotulo-linha">
+                    <label for="tarifa" data-i18n>Tarifa com impostos</label>
+                    <button type="button" id="tarifa-aneel" class="link" hidden data-i18n>Usar valor da ANEEL</button>
+                </div>
+                <div class="campo-unidade">
+                    <input id="tarifa" name="tarifa" type="number" min="0" step="0.01" inputmode="decimal">
+                    <span>R$/kWh</span>
+                </div>
+                <p id="detalhe-tarifa" class="ajuda"></p>
+            </fieldset>
+
+            <fieldset id="equipamentos" hidden>
+                <legend><span class="passo">4</span> <span data-i18n>Equipamentos</span></legend>
+                <label for="marca-modulo" data-i18n>Marca dos módulos</label>
+                <select id="marca-modulo" name="marcaModulo"></select>
+                <label for="marca-inversor" data-i18n>Marca do inversor</label>
+                <select id="marca-inversor" name="marcaInversor"></select>
+                <p id="detalhe-precos" class="ajuda"></p>
+            </fieldset>
+
+            <button type="button" id="abrir-premissas" class="botao-premissas" aria-controls="premissas" aria-expanded="false">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>
+                <span data-i18n>Premissas do cálculo</span>
+                <span id="contador-premissas" class="contador" hidden></span>
+            </button>
+        </form>
+
+        <section id="resultados" class="resultados" aria-live="polite">
+            <div id="vazio" class="painel vazio">
+                <svg class="sol grande" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="7"/><path d="M16 2v4M16 26v4M2 16h4M26 16h4M6 6l3 3M23 23l3 3M6 26l3-3M23 9l3-3"/></svg>
+                <h2 id="vazio-titulo" data-i18n>Comece pelo CEP e pelo consumo</h2>
+                <p data-i18n>Em poucos segundos você vê o sistema indicado, quanto custa, quanto a conta cai e em quanto tempo o investimento se paga.</p>
+            </div>
+            <div id="conteudo" hidden></div>
+        </section>
+    </main>
+
+    <div id="premissas" class="gaveta" hidden>
+        <div class="gaveta-fundo" data-fechar></div>
+        <aside class="gaveta-painel" role="dialog" aria-modal="true" aria-labelledby="premissas-titulo">
+            <div class="gaveta-topo">
+                <div>
+                    <h2 id="premissas-titulo" data-i18n>Premissas do cálculo</h2>
+                    <p data-i18n>Os resultados se atualizam enquanto você altera. Tem um orçamento? Coloque o preço por Wp.</p>
+                </div>
+                <button type="button" class="botao-icone" data-fechar aria-label="Fechar" data-i18n-attr="aria-label">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+                </button>
+            </div>
+            <div id="campos-premissas" class="gaveta-corpo"></div>
+            <div class="gaveta-rodape">
+                <button type="button" id="restaurar" class="botao secundario" data-i18n>Restaurar todos os padrões</button>
+                <button type="button" class="botao" data-fechar data-i18n>Ver resultado</button>
+            </div>
+        </aside>
     </div>
 
-    <footer>
-        &copy; 2025 Calculadora Solar. Desenvolvido para um futuro sustentável.
+    <div id="dica" class="dica" role="tooltip" hidden></div>
+
+    <footer class="rodape">
+        <p data-i18n>Estimativa para orientação. Não substitui o projeto de um engenheiro nem o orçamento de um instalador.</p>
+        <p>&copy; 2026 Gabriel Menge</p>
     </footer>
-
-    <script>
-        function calcularInvestimento() {
-            const consumo = parseFloat(document.getElementById("consumo").value);
-            const tipoSistema = document.getElementById("tipoSistema").value;
-            const valorKwh = 1;
-
-            // Taxas mínimas
-            const taxaMinimaMonofasico = 30; // kWh
-            const taxaMinimaTrifasico = 100; // kWh
-
-            // Determine o consumo a considerar
-            let consumoFinal;
-            let taxaMinimaMensal;
-            if (tipoSistema === "monofasico") {
-                consumoFinal = Math.max(consumo, taxaMinimaMonofasico);
-                taxaMinimaMensal = taxaMinimaMonofasico * valorKwh;
-            } else {
-                consumoFinal = Math.max(consumo, taxaMinimaTrifasico);
-                taxaMinimaMensal = taxaMinimaTrifasico * valorKwh;
-            }
-
-            if (consumoFinal <= 0) {
-                document.getElementById("resultado").style.display = "block";
-                document.getElementById("resultado").innerHTML = "Por favor, insira um valor de consumo válido!";
-                return;
-            }
-
-            const custoMensal = consumoFinal * valorKwh; // Custo real da energia
-            const custoTotalMensal = custoMensal + taxaMinimaMensal; // Custo total inclui custo de consumo + taxa mínima
-
-            const custoPorPlaca = 650;
-            const potenciaPorPlaca = 500;
-            const eficiencia = 0.85; // Eficiência dos painéis
-            const geracaoDiariaPorPlaca = (potenciaPorPlaca * eficiencia / 1000) * 5; // kWh gerados por dia
-            const geracaoMensalPorPlaca = geracaoDiariaPorPlaca * 30; // kWh gerados em um mês
-            const numPlacas = Math.ceil(consumoFinal / geracaoMensalPorPlaca); // Placas necessárias
-
-            let custoInversor, numInversores;
-            if (tipoSistema === "trifasico") {
-                custoInversor = 4000;
-                numInversores = Math.ceil(numPlacas / 8);
-            } else {
-                custoInversor = 3000;
-                numInversores = Math.ceil(numPlacas / 4);
-            }
-
-            const investimentoPlacas = numPlacas * custoPorPlaca; // Custo das placas
-            const custoMaterialMaoDeObra = investimentoPlacas * 0.712; // Custo com mão de obra
-            const investimentoTotal = investimentoPlacas + (numInversores * custoInversor) + custoMaterialMaoDeObra; // Investimento total
-
-            // O retorno total mensal é a economia com energia gerada menos a taxa mínima
-            const economiaMensal = custoMensal - taxaMinimaMensal; // Economiza o que pagava pela energia
-            const retornoMensal = Math.max(0, economiaMensal); // Garantir que não fique negativo
-            const retornoAno = retornoMensal * 12; // O retorno anual
-
-            // Tempo de retorno em anos
-            const tempoRetorno = investimentoTotal / retornoAno;
-
-            // Converte tempoRetorno em anos e meses
-            const anos = Math.floor(tempoRetorno);
-            const meses = Math.round((tempoRetorno - anos) * 12); // Calcula o resto em meses
-
-            document.getElementById("resultado").style.display = "block";
-            document.getElementById("resultado").innerHTML = `
-                <p><strong>Valor do consumo mensal:</strong> R$ ${custoMensal.toFixed(2)}</p>
-                <p><strong>Taxa mínima a ser paga mensalmente:</strong> R$ ${taxaMinimaMensal.toFixed(2)} (${tipoSistema === "monofasico" ? taxaMinimaMonofasico : taxaMinimaTrifasico} kWh)</p>
-                <p><strong>Número de placas solares necessárias:</strong> ${numPlacas} placas</p>
-                <p><strong>Custo de inversores:</strong> R$ ${(numInversores * custoInversor).toFixed(2)} (${numInversores} inversores)</p>
-                <p><strong>Investimento total estimado:</strong> R$ ${investimentoTotal.toFixed(2)}</p>
-                <p><strong>Retorno do investimento:</strong> Aproximadamente ${anos} anos e ${meses} meses</p>
-            `;
-        }
-    </script>
 </body>
 </html>
