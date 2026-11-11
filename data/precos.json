@@ -1,12 +1,12 @@
 {
- "gerado": "2026-11-10T17:02Z",
+ "gerado": "2026-11-11T17:08Z",
  "metodo": "Mediana das ofertas em estoque de cada loja, sem valores extremos; valor final = média entre as lojas.",
  "fontes": [
   {
    "nome": "Neosolar",
    "site": "https://www.neosolar.com.br",
    "ok": true,
-   "ofertas": 27
+   "ofertas": 24
   },
   {
    "nome": "Energia Total",
@@ -22,15 +22,15 @@
   }
  ],
  "modulo": {
-  "valor": 1.4217,
+  "valor": 1.4276,
   "porLoja": {
-   "Neosolar": 1.2186,
+   "Neosolar": 1.2363,
    "Energia Total": 1.5863,
    "Solar Brasil": 1.4601
   },
   "min": 1.1364,
   "max": 1.8505,
-  "ofertas": 27
+  "ofertas": 24
  },
  "inversorCurva": {
   "a": 678.03,
@@ -141,14 +141,6 @@
   "ofertas": 3
  },
  "marcasModulo": [
-  {
-   "marca": "DAH",
-   "valor": 1.1864,
-   "ofertas": 4,
-   "lojas": [
-    "Neosolar"
-   ]
-  },
   {
    "marca": "Gokin",
    "valor": 1.2038,
