@@ -1,12 +1,12 @@
 {
- "gerado": "2026-11-12T17:35Z",
+ "gerado": "2026-11-13T17:12Z",
  "metodo": "Mediana das ofertas em estoque de cada loja, sem valores extremos; valor final = média entre as lojas.",
  "fontes": [
   {
    "nome": "Neosolar",
    "site": "https://www.neosolar.com.br",
    "ok": true,
-   "ofertas": 17
+   "ofertas": 27
   },
   {
    "nome": "Energia Total",
@@ -18,19 +18,18 @@
    "nome": "Solar Brasil",
    "site": "https://www.solarbrasil.com.br",
    "ok": true,
-   "ofertas": 2
+   "ofertas": 0
   }
  ],
  "modulo": {
-  "valor": 1.5171,
+  "valor": 1.7196,
   "porLoja": {
-   "Neosolar": 1.2408,
-   "Energia Total": 1.8505,
-   "Solar Brasil": 1.4601
+   "Neosolar": 1.2186,
+   "Energia Total": 2.2206
   },
-  "min": 1.1468,
-  "max": 1.8505,
-  "ofertas": 16
+  "min": 1.1364,
+  "max": 2.2206,
+  "ofertas": 24
  },
  "inversorCurva": {
   "a": 678.03,
@@ -142,34 +141,41 @@
  },
  "marcasModulo": [
   {
+   "marca": "DAH",
+   "valor": 1.1864,
+   "ofertas": 4,
+   "lojas": [
+    "Neosolar"
+   ]
+  },
+  {
    "marca": "Gokin",
-   "valor": 1.2408,
-   "ofertas": 5,
+   "valor": 1.2038,
+   "ofertas": 8,
    "lojas": [
     "Neosolar"
    ]
   },
   {
    "marca": "Maxeon",
-   "valor": 1.4694,
-   "ofertas": 2,
-   "lojas": [
-    "Neosolar",
-    "Solar Brasil"
-   ]
-  },
-  {
-   "marca": "Ronma",
-   "valor": 1.2017,
+   "valor": 1.4094,
    "ofertas": 3,
    "lojas": [
     "Neosolar"
    ]
   },
   {
+   "marca": "Ronma",
+   "valor": 1.1932,
+   "ofertas": 4,
+   "lojas": [
+    "Neosolar"
+   ]
+  },
+  {
    "marca": "Ztroon",
-   "valor": 1.4311,
-   "ofertas": 3,
+   "valor": 1.4255,
+   "ofertas": 4,
    "lojas": [
     "Neosolar"
    ]
