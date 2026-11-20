@@ -1,11 +1,12 @@
 {
- "gerado": "2026-11-19T18:15Z",
+ "gerado": "2026-11-20T17:48Z",
  "metodo": "Mediana das ofertas em estoque de cada loja, sem valores extremos; valor final = média entre as lojas.",
  "fontes": [
   {
    "nome": "Neosolar",
    "site": "https://www.neosolar.com.br",
-   "ok": false
+   "ok": true,
+   "ofertas": 17
   },
   {
    "nome": "Energia Total",
@@ -21,20 +22,22 @@
   }
  ],
  "modulo": {
-  "valor": 2.2206,
+  "valor": 1.7111,
   "porLoja": {
+   "Neosolar": 1.2017,
    "Energia Total": 2.2206
   },
-  "min": 2.2206,
+  "min": 1.1468,
   "max": 2.2206,
-  "ofertas": 1
+  "ofertas": 14
  },
  "inversorCurva": {
-  "a": 1034.36,
-  "b": 0.8243,
-  "ofertas": 20,
+  "a": 678.03,
+  "b": 0.9257,
+  "ofertas": 23,
   "porLoja": {
-   "Energia Total": 20
+   "Neosolar": 2,
+   "Energia Total": 21
   },
   "deKw": 2.0,
   "ateKw": 75.0
@@ -68,13 +71,14 @@
    "deKw": 5.5,
    "ateKw": 8.5,
    "kwMedio": 6.0,
-   "valor": 599.83,
+   "valor": 499.925,
    "porLoja": {
+    "Neosolar": 400.02,
     "Energia Total": 599.83
    },
-   "min": 599.83,
+   "min": 391.87,
    "max": 599.83,
-   "ofertas": 1
+   "ofertas": 3
   },
   {
    "deKw": 8.5,
@@ -126,60 +130,103 @@
   }
  ],
  "microinversor": {
-  "valor": 666.22,
+  "valor": 688.445,
   "porLoja": {
+   "Neosolar": 710.67,
    "Energia Total": 666.22
   },
   "min": 666.22,
-  "max": 666.22,
-  "ofertas": 1
+  "max": 710.67,
+  "ofertas": 3
  },
- "marcasModulo": [],
+ "marcasModulo": [
+  {
+   "marca": "DAH",
+   "valor": 1.1864,
+   "ofertas": 4,
+   "lojas": [
+    "Neosolar"
+   ]
+  },
+  {
+   "marca": "Gokin",
+   "valor": 1.2083,
+   "ofertas": 4,
+   "lojas": [
+    "Neosolar"
+   ]
+  },
+  {
+   "marca": "Ronma",
+   "valor": 1.1932,
+   "ofertas": 2,
+   "lojas": [
+    "Neosolar"
+   ]
+  },
+  {
+   "marca": "Ztroon",
+   "valor": 1.4255,
+   "ofertas": 2,
+   "lojas": [
+    "Neosolar"
+   ]
+  }
+ ],
  "marcasInversor": [
   {
    "marca": "Canadian",
-   "valor": 1.0595,
-   "ofertas": 7,
+   "valor": 1.112,
+   "ofertas": 8,
    "lojas": [
     "Energia Total"
    ],
-   "fator": 1.0595
+   "fator": 1.112
   },
   {
    "marca": "Deye",
-   "valor": 1.2317,
+   "valor": 1.3741,
    "ofertas": 3,
    "lojas": [
     "Energia Total"
    ],
-   "fator": 1.2317
+   "fator": 1.3741
   },
   {
    "marca": "Growatt",
-   "valor": 1.0733,
+   "valor": 1.3102,
    "ofertas": 2,
    "lojas": [
     "Energia Total"
    ],
-   "fator": 1.0733
+   "fator": 1.3102
+  },
+  {
+   "marca": "Livoltek",
+   "valor": 0.6795,
+   "ofertas": 2,
+   "lojas": [
+    "Neosolar"
+   ],
+   "fator": 0.6795
   },
   {
    "marca": "Solis",
-   "valor": 0.9664,
+   "valor": 0.9624,
    "ofertas": 4,
    "lojas": [
     "Energia Total"
    ],
-   "fator": 0.9664
+   "fator": 0.9624
   },
   {
    "marca": "WDC",
-   "valor": 0.6305,
+   "valor": 0.7692,
    "ofertas": 2,
    "lojas": [
     "Energia Total"
    ],
-   "fator": 0.6305
+   "fator": 0.7692
   }
  ]
 }
