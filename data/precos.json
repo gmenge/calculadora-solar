@@ -1,12 +1,12 @@
 {
- "gerado": "2026-11-24T20:10Z",
+ "gerado": "2026-11-25T19:15Z",
  "metodo": "Mediana das ofertas em estoque de cada loja, sem valores extremos; valor final = média entre as lojas.",
  "fontes": [
   {
    "nome": "Neosolar",
    "site": "https://www.neosolar.com.br",
    "ok": true,
-   "ofertas": 27
+   "ofertas": 23
   },
   {
    "nome": "Energia Total",
@@ -22,14 +22,14 @@
   }
  ],
  "modulo": {
-  "valor": 1.7196,
+  "valor": 1.7307,
   "porLoja": {
-   "Neosolar": 1.2186,
+   "Neosolar": 1.2408,
    "Energia Total": 2.2206
   },
   "min": 1.1364,
   "max": 2.2206,
-  "ofertas": 24
+  "ofertas": 20
  },
  "inversorCurva": {
   "a": 678.03,
@@ -160,14 +160,6 @@
    "marca": "Maxeon",
    "valor": 1.4094,
    "ofertas": 3,
-   "lojas": [
-    "Neosolar"
-   ]
-  },
-  {
-   "marca": "Ronma",
-   "valor": 1.1932,
-   "ofertas": 4,
    "lojas": [
     "Neosolar"
    ]
